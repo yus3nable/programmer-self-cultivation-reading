@@ -1,0 +1,4060 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="链接、装载与库——从源代码到程序运行">
+      
+      
+      
+        <link rel="canonical" href="https://yus3nable.github.io/programmer-self-cultivation-reading/chapters/04/sections/4.2.html">
+      
+      
+        <link rel="prev" href="4.1.html">
+      
+      
+        <link rel="next" href="4.3.html">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>4.2 符号解析与重定位 - 程序员的自我修养</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/reader.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#42" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../index.html" title="程序员的自我修养" class="md-header__button md-logo" aria-label="程序员的自我修养" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            程序员的自我修养
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.2 符号解析与重定位
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="程序员的自我修养" class="md-nav__button md-logo" aria-label="程序员的自我修养" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg>
+
+    </a>
+    程序员的自我修养
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    书籍介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contents.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    全书目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    书前资料
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            书前资料
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E8%AE%BF%E8%B0%88/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    作者访谈录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E5%BA%8F%E8%A8%80%E4%B8%80/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    序言一
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E5%BA%8F%E8%A8%80%E4%BA%8C/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    序言二
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E5%BA%8F%E8%A8%80%E4%B8%89/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    序言三
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E5%AF%BC%E8%AF%BB/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    导读
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../parts/1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第一部分 · 简介
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0" aria-label="展开或收起 第一部分 · 简介">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第一部分 · 简介
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../01/sections/1.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 1 章 温故而知新
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0" aria-label="展开或收起 第 1 章 温故而知新">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            第 1 章 温故而知新
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.1 从Hello World说起
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.2 万变不离其宗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.3 站得高，望得远
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.4 操作系统做什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.5 内存不够怎么办
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.6 众人拾柴火焰高
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01/sections/1.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.7 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../parts/2.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第二部分 · 静态链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0" aria-label="展开或收起 第二部分 · 静态链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第二部分 · 静态链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../02/sections/2.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 2 章 编译和链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0" aria-label="展开或收起 第 2 章 编译和链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            第 2 章 编译和链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02/sections/2.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.1 被隐藏了的过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02/sections/2.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.2 编译器做了什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02/sections/2.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.3 链接器年龄比编译器长
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02/sections/2.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.4 模块拼装——静态链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02/sections/2.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.5 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../03/sections/3.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 3 章 目标文件里有什么
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0" aria-label="展开或收起 第 3 章 目标文件里有什么">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            第 3 章 目标文件里有什么
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.1 目标文件的格式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.2 目标文件是什么样的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.3 挖掘 SimpleSection.o
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.4 ELF 文件结构描述
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.5 链接的接口——符号
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.6 调试信息
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03/sections/3.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.7 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="4.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 4 章 静态链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_4" id="__nav_5_4_label" tabindex="0" aria-label="展开或收起 第 4 章 静态链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            第 4 章 静态链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.1 空间与地址分配
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4.2 符号解析与重定位
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="4.2.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.2 符号解析与重定位
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.1 重定位
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.2 重定位表
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.3 符号解析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.4 指令修正方式
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.3 COMMON 块
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.4 C++相关问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.5 静态库链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.6 链接过程控制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.7 BFD 库
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.8.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.8 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../05/sections/5.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 5 章 Windows PE/COFF
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="0" aria-label="展开或收起 第 5 章 Windows PE/COFF">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            第 5 章 Windows PE/COFF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.1 Windows 的二进制文件格式 PE/COFF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.2 PE 的前身——COFF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.3 链接指示信息
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.4 调试信息
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.5 大家都有符号表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.6 Windows 下的 ELF——PE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05/sections/5.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5.7 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../parts/3.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第三部分 · 装载与动态链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0" aria-label="展开或收起 第三部分 · 装载与动态链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第三部分 · 装载与动态链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../06/sections/6.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 6 章 可执行文件的装载与进程
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_2" id="__nav_6_2_label" tabindex="0" aria-label="展开或收起 第 6 章 可执行文件的装载与进程">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            第 6 章 可执行文件的装载与进程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.1 进程虚拟地址空间
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.2 装载的方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.3 从操作系统角度看可执行文件的装载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.4 进程虚存空间分布
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.5 Linux 内核装载 ELF 过程简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.6 Windows PE 的装载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06/sections/6.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.7 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../07/sections/7.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 7 章 动态链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_3" id="__nav_6_3_label" tabindex="0" aria-label="展开或收起 第 7 章 动态链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            第 7 章 动态链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.1 为什么要动态链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.2 简单的动态链接例子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.3 地址无关代码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.4 延迟绑定（PLT）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.5 动态链接相关结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.6 动态链接的步骤和实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.7 显式运行时链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07/sections/7.8.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7.8 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../08/sections/8.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 8 章 Linux 共享库的组织
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_4" id="__nav_6_4_label" tabindex="0" aria-label="展开或收起 第 8 章 Linux 共享库的组织">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            第 8 章 Linux 共享库的组织
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.1 共享库版本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.2 符号版本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.3 共享库系统路径
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.4 共享库查找过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.5 环境变量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.6 共享库的创建和安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08/sections/8.7.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8.7 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../09/sections/9.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 9 章 Windows 下的动态链接
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_5" id="__nav_6_5_label" tabindex="0" aria-label="展开或收起 第 9 章 Windows 下的动态链接">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            第 9 章 Windows 下的动态链接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.1 DLL 简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.2 符号导出导入表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.3 DLL 优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.4 C++ 与动态链接
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.5 DLL HELL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09/sections/9.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9.6 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../parts/4.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第四部分 · 库与运行库
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0" aria-label="展开或收起 第四部分 · 库与运行库">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第四部分 · 库与运行库
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%E5%AF%BC%E8%A8%80/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    库与运行库：导言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../10/sections/10.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 10 章 内存
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_3" id="__nav_7_3_label" tabindex="0" aria-label="展开或收起 第 10 章 内存">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            第 10 章 内存
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10/sections/10.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.1 程序的内存布局
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10/sections/10.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.2 栈与调用惯例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10/sections/10.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.3 堆与内存管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10/sections/10.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.4 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../11/sections/11.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 11 章 运行库
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_4" id="__nav_7_4_label" tabindex="0" aria-label="展开或收起 第 11 章 运行库">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            第 11 章 运行库
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.1 入口函数和程序初始化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.2 C/C++ 运行库
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.3 运行库与多线程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.4 C++ 全局构造与析构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.5 fread 实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11/sections/11.6.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11.6 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../12/sections/12.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 12 章系统调用与 API
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_5" id="__nav_7_5_label" tabindex="0" aria-label="展开或收起 第 12 章系统调用与 API">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            第 12 章系统调用与 API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12/sections/12.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12.1 系统调用介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12/sections/12.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12.2 系统调用原理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12/sections/12.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12.3 Windows API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12/sections/12.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12.4 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../13/sections/13.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    第 13 章 运行库实现
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_6" id="__nav_7_6_label" tabindex="0" aria-label="展开或收起 第 13 章 运行库实现">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            第 13 章 运行库实现
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/sections/13.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13.1 C 语言运行库
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/sections/13.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13.2 如何使用 Mini CRT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/sections/13.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13.3 C++ 运行库实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/sections/13.4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13.4 如何使用 Mini CRT++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13/sections/13.5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13.5 本章小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    附录与索引
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            附录与索引
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../A/sections/A.1.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    附录 A
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8_1" id="__nav_8_1_label" tabindex="0" aria-label="展开或收起 附录 A">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            附录 A
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../A/sections/A.1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A.1 字节序（Byte Order）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../A/sections/A.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A.2 ELF 常见段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../A/sections/A.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A.3 常用开发工具命令行参考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../front/%E7%B4%A2%E5%BC%95/sections/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.1 重定位
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.2 重定位表
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.3 符号解析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.4 指令修正方式
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+<div class="reader-page reader-section">
+  
+  <header class="reading-heading">
+    <div class="reading-context">第 4 章 静态链接</div>
+    <h1 id="42">4.2 符号解析与重定位<a class="headerlink" href="#42" title="Permanent link">&para;</a></h1>
+    <div class="reader-actions">
+      <span>原书 103—110 页</span>
+      <a href="../chapter.html">整章阅读 ↗</a>
+      
+      <a href="../../../source/chapters-04-2.html">对照原页 ↗</a>
+    </div>
+  </header>
+  
+  <div class="book-prose">
+<h3 id="421">4.2.1 重定位<a class="headerlink" href="#421" title="Permanent link">&para;</a></h3>
+<p>在完成空间和地址的分配步骤以后，链接器就进入了符号解析与重定位的步骤，这也是静态链接的核心内容。在分析符号解析和重定位之前，首先让我们来看看“a.o”里面是怎么使用这两个外部符号的，也就是说我们在“a.c”的源程序里面使用了“shared”变量和“swap”函数，那么编译器在将“a.c”编译成指令时，它如何访问 “shared”变量？如何调用“swap”函数？</p>
+<p>使用objdump 的“-d”参数可以看到“a.o”的代码段反汇编结果：</p>
+<p><a class="scan-link" href="../assets/p0127-code-1.png" target="_blank" rel="noopener"><img src="../assets/p0127-code-1.png" alt="原书第 104 页代码与命令" loading="lazy"></a></p>
+<p>我们知道在程序的代码里面使用的都是虚拟地址，在这里也可以看到 “main”的起始地址为 0x00000000，这是因为在未进行前面提到过的空间分配之前，目标文件代码段中的起始地址以 0x00000000 开始，等到空间分配完成以后，各个函数才会确定自己在虚拟地址空间中的位置。</p>
+<p>我们可以很清楚地看到“a.o”的反汇编结果中，“a.o”共定义了一个函数 main。这个函数占用0x33个字节，共17条指令；最左边那列是每条指令的偏移量，每一行代表一条指令（有些指令的长度很长，如第偏移为 0x18 的mov 指令，它的二进制显示占据了两行）。我们已经用粗体标出了两个引用“shared”和“swap”的位置，对于“shared” 的引用是一条“mov”指令，这条指令总共8个字节，它的作用是将“shared” 的地址赋值到ESP寄存器+4 的偏移地址中去，前面4个字节是指令码，后面4个字节是“shared” 的地址，我们只关心后面的4个字节部分，如图4-4所示。</p>
+<p>当源代码“a.c”在被编译成目标文件时，编译器并不知道 “shared”和“swap” 的地址，因为它们定义在其他目标文件中。所以编译器就暂时把地址0看作是“shared”的地址，我们可以看到这条“mov”指令中，关于 “shared” 的地址部分为 “0x00000000”。</p>
+<p><a class="scan-link" href="../assets/p0128-figure-1.png" target="_blank" rel="noopener"><img src="../assets/p0128-figure-1.png" alt="图4-4 绝对地址指令" loading="lazy"></a></p>
+<p class="image-caption">图4-4 绝对地址指令</p>
+
+<p>另外一个是偏移为0x26的指令的一条调用指令，它其实就表示对 swap 函数的调用，如图4-5所示。</p>
+<p><a class="scan-link" href="../assets/p0128-figure-3.png" target="_blank" rel="noopener"><img src="../assets/p0128-figure-3.png" alt="图 4-5 相对地址指令" loading="lazy"></a></p>
+<p class="image-caption">图 4-5 相对地址指令</p>
+
+<p>这条指令共5个字节，前面的 0xE8 是操作码（Operation Code），从 Intel 的IA-32体系软件开发者手册（IA-32 Intel Architecture Software Developer’s Manual，参考文献里有详细介绍）可以查阅到，这条指令是一条近址相对位移调用指令（Call near, relative, displacement relative to next instruction），后面4个字节就是被调用函数的相对于调用指令的下一条指令的偏移量。在没有重定位之前，相对偏移被置为 0xFFFFFFFC（小端），它是常量“-4”的补码形式。</p>
+<p>让我们来仔细看这条指令的含义。紧跟在这条 call 指令后面的那条指令为add指令，add指令的地址为0x2b，而相对于 add 指令偏移为“-4”的地址即0x2b-4=0x27。所以这条call 指令的实际调用地址为0x27。我们可以看到0x27存放着并不是swap 函数的地址，跟前面“shared”一样，“0xFFFFFFFC”只是一个临时的假地址，因为在编译的时候，编译器并不知道“swap”的真正地址。</p>
+<p>编译器把这两条指令的地址部分暂时用地址 “0x00000000”和 “0xFFFFFFFC”代替着，把真正的地址计算工作留给了链接器。我们通过前面的空间与地址分配可以得知，链接器在完成地址和空间分配之后就已经可以确定所有符号的虚拟地址了，那么链接器就可以根据符号的地址对每个需要重定位的指令进行地址修正。我们用objdump 来反汇编输出程序“ab”的代码段，可以看到 main 函数的两个重定位入口都已经被修正到正确的位置：</p>
+<p><a class="scan-link" href="../assets/p0129-code-1.png" target="_blank" rel="noopener"><img src="../assets/p0129-code-1.png" alt="原书第 106 页代码与命令" loading="lazy"></a></p>
+<p>经过修正以后，“shared”和 “swap”的地址分别为0x08049108 和 0x00000009（小端字节序）。关于“shared”很好理解，因为“shared”变量的地址的确是0x08049108。对于“swap”来说稍显晦涩。我们前面介绍过，这个“call”指令是一条近址相对位移调用指令，它后面跟的是调用指令的下一条指令的偏移量，“call” 指令的下一条指令是 “add”，它的地址是0x080480bf，所以 “相对于 add 指令偏移量为 0x00000009”的地址为 0x080480bf +9 =0x080480c8，即刚好是“swap ”函数的地址。有兴趣的读者可以阅读后面的“指令修正方式”一节，那里我们将更加详细介绍指令修正时的地址计算方式。</p>
+<h3 id="422">4.2.2 重定位表<a class="headerlink" href="#422" title="Permanent link">&para;</a></h3>
+<p>那么链接器是怎么知道哪些指令是要被调整的呢？这些指令的哪些部分要被调整？怎么调整？比如上面例子中“mov”指令和“call” 指令的调整方式就有所不同。事实上在 ELF文件中，有一个叫重定位表（Relocation Table）的结构专门用来保存这些与重定位相关的信息，我们在前面介绍 ELF 文件结构时已经提到过了重定位表，它在 ELF 文件中往往是一个或多个段。对于可重定位的ELF 文件来说，它必须包含有重定位表，用来描述如何修改相应的段里的内容。对于每个要被重定位的 ELF 段都有一个对应的重定位表，而一个重定位表往往就是ELF 文件中的一个段，所以其实重定位表也可以叫重定位段，我们在这里统一称作重定位表。比如代码段“text”如有要被重定位的地方，那么会有一个相对应叫 “.rel.text” 的段保存了代码段的重定位表：如果代码段“.data”有要被重定位的地方，就会有一个相对应叫“.rel.data”的段保存了数据段的重定位表。我们可以使用 objdump 来查看目标文件的重定位表：</p>
+<p><a class="scan-link" href="../assets/p0130-code-2.png" target="_blank" rel="noopener"><img src="../assets/p0130-code-2.png" alt="原书第 107 页代码与命令" loading="lazy"></a></p>
+<p>这个命令可以用来查看“a.o”里面要重定位的地方，即“a.o”所有引用到外部符号的地址。每个要被重定位的地方叫一个重定位入口（Relocation Entry），我们可以看到 “a.o”里面有两个重定位入口。重定位入口的偏移（Offset）表示该入口在要被重定位的段中的位置，“RELOCATION RECORDS FOR ［.text］”表示这个重定位表是代码段的重定位表，所以偏移表示代码段中须要被调整的位置。对照前面的反汇编结果可以知道，这里的0x1c 和0x27分别就是代码段中“mov”指令和“call”指令的地址部分。</p>
+<p>对于32位的Intel x86 系列处理器来说，重定位表的结构也很简单，它是一个 Elf32_Rel结构的数组，每个数组元素对应一个重定位入口。Elf32_Rel 的定义如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Elf32_Addr</span><span class="w"> </span><span class="n">r_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Elf32_Word</span><span class="w"> </span><span class="n">r_info</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Elf32_Rel</span><span class="p">;</span>
+</code></pre></div>
+<p><a class="scan-link" href="../assets/p0130-table-1.png" target="_blank" rel="noopener"><img src="../assets/p0130-table-1.png" alt="原书第 107 页表格" loading="lazy"></a></p>
+<h3 id="423">4.2.3 符号解析<a class="headerlink" href="#423" title="Permanent link">&para;</a></h3>
+<p>在我们通常的观念里，之所以要链接是因为我们目标文件中用到的符号被定义在其他目标文件，所以要将它们链接起来。比如我们直接使用 ld来链接“a.o”，而不将“b.o”作为输入。链接器就会发现 shared 和swap 两个符号没有被定义，没有办法完成链接工作：</p>
+<p><a class="scan-link" href="../assets/p0131-code-1.png" target="_blank" rel="noopener"><img src="../assets/p0131-code-1.png" alt="原书第 108 页代码与命令" loading="lazy"></a></p>
+<p>这也是我们平时在编写程序的时候最常碰到的问题之一，就是链接时符号未定义。导致这个问题的原因很多，最常见的一般都是链接时缺少了某个库，或者输入目标文件路径不正确或符号的声明与定义不一样。所以从普通程序员的角度看，符号的解析占据了链接过程的主要内容。</p>
+<p>通过前面指令重定位的介绍，我们可以更加深层次地理解为什么缺少符号的定义会导致链接错误。其实重定位过程也伴随着符号的解析过程，每个目标文件都可能定义一些符号，也可能引用到定义在其他目标文件的符号。重定位的过程中，每个重定位的入口都是对一个符号的引用，那么当链接器须要对某个符号的引用进行重定位时，它就要确定这个符号的目标地址。这时候链接器就会去查找由所有输入目标文件的符号表组成的全局符号表，找到相应的符号后进行重定位。</p>
+<p>比如我们查看“a.o” 的符号表：</p>
+<p><a class="scan-link" href="../assets/p0131-code-2.png" target="_blank" rel="noopener"><img src="../assets/p0131-code-2.png" alt="原书第 108 页代码与命令" loading="lazy"></a></p>
+<p>“GLOBAL”类型的符号，除了“main”函数是定义在代码段之外，其他两个 “shared”和“swap”都是“UND”，即“undefined”未定义类型，这种未定义的符号都是因为该目标文件中有关于它们的重定位项。所以在链接器扫描完所有的输入目标文件之后，所有这些未定义的符号都应该能够在全局符号表中找到，否则链接器就报符号未定义错误。</p>
+<h3 id="424">4.2.4 指令修正方式<a class="headerlink" href="#424" title="Permanent link">&para;</a></h3>
+<p>不同的处理器指令对于地址的格式和方式都不一样。比如对于32位 Intel x86 处理器来说，转移跳转指令（jmp 指令）、子程序调用指令（call 指令）和数据传送指令（mov 指令）寻址方式千差万别。直至2006年为止，Intel x86 系列CPU 的jmp 指令有11 种寻址模式：call 指令有10种：mov 指令则有多达34种寻址模式！这些寻址方式有如下几方面的区别：</p>
+<ul>
+<li>
+<p>近址寻址或远址寻址。</p>
+</li>
+<li>
+<p>绝对寻址或相对寻址。</p>
+</li>
+<li>
+<p>寻址长度为8位、16位、32位或64位。</p>
+</li>
+</ul>
+<p>但是对于32位x86平台下的 ELF 文件的重定位入口所修正的指令寻址方式只有两种：</p>
+<ul>
+<li>
+<p>绝对近址32位寻址。</p>
+</li>
+<li>
+<p>相对近址32位寻址。</p>
+</li>
+</ul>
+<p>这两种重定位方式指令修正方式每个被修正的位置的长度都为32位，即4个字节。而且都是近址寻址，不用考虑Intel 的段间远址寻址。唯一的区别就是绝对寻址和相对寻址。前面我们提到过，重定位入口的r_info 成员低8位表示重定位入口类型，如表4-2所示。</p>
+<ul>
+<li>表4-2</li>
+</ul>
+<p><a class="scan-link" href="../assets/p0132-table-1.png" target="_blank" rel="noopener"><img src="../assets/p0132-table-1.png" alt="原书第 109 页表格" loading="lazy"></a></p>
+<p>A= 保存在被修正位置的值。</p>
+<p>P= 被修正的位置（相对于段开始的偏移量或者虚拟地址），注意，该值可通过r_offset 计算得到。</p>
+<p>S= 符号的实际地址，即由r_info的高24位指定的符号的实际地址</p>
+<p>对照前面 a.o 的重定位信息，我们可以看到第一个重定位入口是对swap 符号的引用，类型为 R_386_PC32，查阅 Intel 指令手册，它的确是一条相对位移调用指令；而 shared 是R_386_32类型的，它修正的是一条传输指令的源，该传输指令的源是一个立即数，即 shared的绝对地址。所以这两个重定位入口很具有代表性，分别代表了两种不同的重定位地址修正方式。</p>
+<p>现在让我们假设在将a.o 和 b.o 链接成最终可执行文件后，main 函数的虚拟地址为0x1000,swap 函数的虚拟地址为0x2000:shared 变量的虚拟地址为0x3000。那么我们的链接器将如何修正 a.o里面这两个重定位入口呢？</p>
+<p>绝对寻址修正 让我们先看a.o的第一个重定位入口，即偏移为 0x18 的这条mov 指令的修正，它的修正方式是R_386_32，即绝对地址修正。对于这个重定位入口，它修正后的结果应该是S+A。</p>
+<ul>
+<li>
+<p>S是符号 shared 的实际地址，即0x3000。</p>
+</li>
+<li>
+<p>A 是被修正位置的值，即0x00000000。</p>
+</li>
+</ul>
+<p>所以最后这个重定位入口修正后地址为：0x3000+0x00000000= 0x3000。即指令修正后应该是：</p>
+<p><a class="scan-link" href="../assets/p0133-code-1.png" target="_blank" rel="noopener"><img src="../assets/p0133-code-1.png" alt="原书第 110 页代码与命令" loading="lazy"></a></p>
+<p>相对寻址修正 让我们再来看看 a.o的第二个重定位入口，即偏移为0x26的这条call指令的修正，它的指令修正方式是 R_386_PC32，即相对寻址修正。对于这个重定位入口，它修正后的结果应该是S+A-P。</p>
+<ul>
+<li>
+<p>S是符号swap 的实际地址，即0x2000；</p>
+</li>
+<li>
+<p>A 是被修正位置的值，即 0xFFFFFFFC （-4）；</p>
+</li>
+<li>
+<p>P为被修正的位置，当链接成可执行文件时，这个值应该是被修正位置的虚拟地址，即0x1000 + 0x27。</p>
+</li>
+</ul>
+<p>所以最后这个重定位入口修正后地址为：0x2000+（-4）-（0x1000+0x27）= 0xFD5。即指令修正后应该是：</p>
+<p><a class="scan-link" href="../assets/p0133-code-2.png" target="_blank" rel="noopener"><img src="../assets/p0133-code-2.png" alt="原书第 110 页代码与命令" loading="lazy"></a></p>
+<p>这条相对位移调用指令调用的地址是该指令下一条指令的起始地址加上偏移量，即：0x102b+ 0xfd5 = 0x2000，刚好是 swap 函数的地址。</p>
+<p>从这两个例子可以看出来，绝对寻址修正和相对寻址修正的区别就是绝对寻址修正后的地址为该符号的实际地址：相对寻址修正后的地址为符号距离被修正位置的地址差。</p></div>
+</div>
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="4.1.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 4.1 空间与地址分配">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                4.1 空间与地址分配
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="4.3.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 4.3 COMMON 块">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                4.3 COMMON 块
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.footer", "navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
