@@ -1,0 +1,1274 @@
+{
+  "title": "程序员的自我修养",
+  "subtitle": "链接、装载与库",
+  "chapters": [
+    {
+      "id": "访谈",
+      "kind": "front",
+      "title": "作者访谈录",
+      "part": 0,
+      "directory": "front/访谈",
+      "sections": [
+        {
+          "title": "作者访谈录",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            4,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "序言一",
+      "kind": "front",
+      "title": "序言一",
+      "part": 0,
+      "directory": "front/序言一",
+      "sections": [
+        {
+          "title": "序言一",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            8,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "序言二",
+      "kind": "front",
+      "title": "序言二",
+      "part": 0,
+      "directory": "front/序言二",
+      "sections": [
+        {
+          "title": "序言二",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            10,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "id": "序言三",
+      "kind": "front",
+      "title": "序言三",
+      "part": 0,
+      "directory": "front/序言三",
+      "sections": [
+        {
+          "title": "序言三",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            11,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "id": "导读",
+      "kind": "front",
+      "title": "导读",
+      "part": 0,
+      "directory": "front/导读",
+      "sections": [
+        {
+          "title": "导读",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            13,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "kind": "chapter",
+      "number": 1,
+      "title": "第 1 章 温故而知新",
+      "part": 1,
+      "directory": "chapters/01",
+      "cover_page": 26,
+      "sections": [
+        {
+          "title": "1.1 从Hello World说起",
+          "path": "sections/1.1.md",
+          "pdf_pages": [
+            27,
+            28
+          ],
+          "printed_pages": [
+            4,
+            5
+          ]
+        },
+        {
+          "title": "1.2 万变不离其宗",
+          "path": "sections/1.2.md",
+          "pdf_pages": [
+            28,
+            31
+          ],
+          "printed_pages": [
+            5,
+            8
+          ]
+        },
+        {
+          "title": "1.3 站得高，望得远",
+          "path": "sections/1.3.md",
+          "pdf_pages": [
+            31,
+            33
+          ],
+          "printed_pages": [
+            8,
+            10
+          ]
+        },
+        {
+          "title": "1.4 操作系统做什么",
+          "path": "sections/1.4.md",
+          "pdf_pages": [
+            33,
+            37
+          ],
+          "printed_pages": [
+            10,
+            14
+          ]
+        },
+        {
+          "title": "1.5 内存不够怎么办",
+          "path": "sections/1.5.md",
+          "pdf_pages": [
+            37,
+            41
+          ],
+          "printed_pages": [
+            14,
+            18
+          ]
+        },
+        {
+          "title": "1.6 众人拾柴火焰高",
+          "path": "sections/1.6.md",
+          "pdf_pages": [
+            42,
+            56
+          ],
+          "printed_pages": [
+            19,
+            33
+          ]
+        },
+        {
+          "title": "1.7 本章小结",
+          "path": "sections/1.7.md",
+          "pdf_pages": [
+            56,
+            56
+          ],
+          "printed_pages": [
+            33,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "kind": "chapter",
+      "number": 2,
+      "title": "第 2 章 编译和链接",
+      "part": 2,
+      "directory": "chapters/02",
+      "cover_page": 60,
+      "sections": [
+        {
+          "title": "2.1 被隐藏了的过程",
+          "path": "sections/2.1.md",
+          "pdf_pages": [
+            61,
+            64
+          ],
+          "printed_pages": [
+            38,
+            41
+          ]
+        },
+        {
+          "title": "2.2 编译器做了什么",
+          "path": "sections/2.2.md",
+          "pdf_pages": [
+            64,
+            71
+          ],
+          "printed_pages": [
+            41,
+            48
+          ]
+        },
+        {
+          "title": "2.3 链接器年龄比编译器长",
+          "path": "sections/2.3.md",
+          "pdf_pages": [
+            71,
+            73
+          ],
+          "printed_pages": [
+            48,
+            50
+          ]
+        },
+        {
+          "title": "2.4 模块拼装——静态链接",
+          "path": "sections/2.4.md",
+          "pdf_pages": [
+            73,
+            76
+          ],
+          "printed_pages": [
+            50,
+            53
+          ]
+        },
+        {
+          "title": "2.5 本章小结",
+          "path": "sections/2.5.md",
+          "pdf_pages": [
+            76,
+            76
+          ],
+          "printed_pages": [
+            53,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "kind": "chapter",
+      "number": 3,
+      "title": "第 3 章 目标文件里有什么",
+      "part": 2,
+      "directory": "chapters/03",
+      "cover_page": 78,
+      "sections": [
+        {
+          "title": "3.1 目标文件的格式",
+          "path": "sections/3.1.md",
+          "pdf_pages": [
+            79,
+            81
+          ],
+          "printed_pages": [
+            56,
+            58
+          ]
+        },
+        {
+          "title": "3.2 目标文件是什么样的",
+          "path": "sections/3.2.md",
+          "pdf_pages": [
+            81,
+            83
+          ],
+          "printed_pages": [
+            58,
+            60
+          ]
+        },
+        {
+          "title": "3.3 挖掘 SimpleSection.o",
+          "path": "sections/3.3.md",
+          "pdf_pages": [
+            84,
+            91
+          ],
+          "printed_pages": [
+            61,
+            68
+          ]
+        },
+        {
+          "title": "3.4 ELF 文件结构描述",
+          "path": "sections/3.4.md",
+          "pdf_pages": [
+            91,
+            104
+          ],
+          "printed_pages": [
+            68,
+            81
+          ]
+        },
+        {
+          "title": "3.5 链接的接口——符号",
+          "path": "sections/3.5.md",
+          "pdf_pages": [
+            104,
+            117
+          ],
+          "printed_pages": [
+            81,
+            94
+          ]
+        },
+        {
+          "title": "3.6 调试信息",
+          "path": "sections/3.6.md",
+          "pdf_pages": [
+            117,
+            118
+          ],
+          "printed_pages": [
+            94,
+            95
+          ]
+        },
+        {
+          "title": "3.7 本章小结",
+          "path": "sections/3.7.md",
+          "pdf_pages": [
+            118,
+            118
+          ],
+          "printed_pages": [
+            95,
+            95
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "kind": "chapter",
+      "number": 4,
+      "title": "第 4 章 静态链接",
+      "part": 2,
+      "directory": "chapters/04",
+      "cover_page": 120,
+      "sections": [
+        {
+          "title": "4.1 空间与地址分配",
+          "path": "sections/4.1.md",
+          "pdf_pages": [
+            121,
+            126
+          ],
+          "printed_pages": [
+            98,
+            103
+          ]
+        },
+        {
+          "title": "4.2 符号解析与重定位",
+          "path": "sections/4.2.md",
+          "pdf_pages": [
+            126,
+            133
+          ],
+          "printed_pages": [
+            103,
+            110
+          ]
+        },
+        {
+          "title": "4.3 COMMON 块",
+          "path": "sections/4.3.md",
+          "pdf_pages": [
+            134,
+            135
+          ],
+          "printed_pages": [
+            111,
+            112
+          ]
+        },
+        {
+          "title": "4.4 C++相关问题",
+          "path": "sections/4.4.md",
+          "pdf_pages": [
+            135,
+            140
+          ],
+          "printed_pages": [
+            112,
+            117
+          ]
+        },
+        {
+          "title": "4.5 静态库链接",
+          "path": "sections/4.5.md",
+          "pdf_pages": [
+            140,
+            146
+          ],
+          "printed_pages": [
+            117,
+            123
+          ]
+        },
+        {
+          "title": "4.6 链接过程控制",
+          "path": "sections/4.6.md",
+          "pdf_pages": [
+            146,
+            154
+          ],
+          "printed_pages": [
+            123,
+            131
+          ]
+        },
+        {
+          "title": "4.7 BFD 库",
+          "path": "sections/4.7.md",
+          "pdf_pages": [
+            154,
+            155
+          ],
+          "printed_pages": [
+            131,
+            132
+          ]
+        },
+        {
+          "title": "4.8 本章小结",
+          "path": "sections/4.8.md",
+          "pdf_pages": [
+            155,
+            155
+          ],
+          "printed_pages": [
+            132,
+            132
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "kind": "chapter",
+      "number": 5,
+      "title": "第 5 章 Windows PE/COFF",
+      "part": 2,
+      "directory": "chapters/05",
+      "cover_page": 156,
+      "sections": [
+        {
+          "title": "5.1 Windows 的二进制文件格式 PE/COFF",
+          "path": "sections/5.1.md",
+          "pdf_pages": [
+            157,
+            158
+          ],
+          "printed_pages": [
+            134,
+            135
+          ]
+        },
+        {
+          "title": "5.2 PE 的前身——COFF",
+          "path": "sections/5.2.md",
+          "pdf_pages": [
+            158,
+            162
+          ],
+          "printed_pages": [
+            135,
+            139
+          ]
+        },
+        {
+          "title": "5.3 链接指示信息",
+          "path": "sections/5.3.md",
+          "pdf_pages": [
+            162,
+            163
+          ],
+          "printed_pages": [
+            139,
+            140
+          ]
+        },
+        {
+          "title": "5.4 调试信息",
+          "path": "sections/5.4.md",
+          "pdf_pages": [
+            163,
+            164
+          ],
+          "printed_pages": [
+            140,
+            141
+          ]
+        },
+        {
+          "title": "5.5 大家都有符号表",
+          "path": "sections/5.5.md",
+          "pdf_pages": [
+            164,
+            165
+          ],
+          "printed_pages": [
+            141,
+            142
+          ]
+        },
+        {
+          "title": "5.6 Windows 下的 ELF——PE",
+          "path": "sections/5.6.md",
+          "pdf_pages": [
+            165,
+            169
+          ],
+          "printed_pages": [
+            142,
+            146
+          ]
+        },
+        {
+          "title": "5.7 本章小结",
+          "path": "sections/5.7.md",
+          "pdf_pages": [
+            169,
+            169
+          ],
+          "printed_pages": [
+            146,
+            146
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "kind": "chapter",
+      "number": 6,
+      "title": "第 6 章 可执行文件的装载与进程",
+      "part": 3,
+      "directory": "chapters/06",
+      "cover_page": 172,
+      "sections": [
+        {
+          "title": "6.1 进程虚拟地址空间",
+          "path": "sections/6.1.md",
+          "pdf_pages": [
+            173,
+            176
+          ],
+          "printed_pages": [
+            150,
+            153
+          ]
+        },
+        {
+          "title": "6.2 装载的方式",
+          "path": "sections/6.2.md",
+          "pdf_pages": [
+            176,
+            180
+          ],
+          "printed_pages": [
+            153,
+            157
+          ]
+        },
+        {
+          "title": "6.3 从操作系统角度看可执行文件的装载",
+          "path": "sections/6.3.md",
+          "pdf_pages": [
+            180,
+            183
+          ],
+          "printed_pages": [
+            157,
+            160
+          ]
+        },
+        {
+          "title": "6.4 进程虚存空间分布",
+          "path": "sections/6.4.md",
+          "pdf_pages": [
+            183,
+            196
+          ],
+          "printed_pages": [
+            160,
+            173
+          ]
+        },
+        {
+          "title": "6.5 Linux 内核装载 ELF 过程简介",
+          "path": "sections/6.5.md",
+          "pdf_pages": [
+            196,
+            198
+          ],
+          "printed_pages": [
+            173,
+            175
+          ]
+        },
+        {
+          "title": "6.6 Windows PE 的装载",
+          "path": "sections/6.6.md",
+          "pdf_pages": [
+            198,
+            199
+          ],
+          "printed_pages": [
+            175,
+            176
+          ]
+        },
+        {
+          "title": "6.7 本章小结",
+          "path": "sections/6.7.md",
+          "pdf_pages": [
+            200,
+            200
+          ],
+          "printed_pages": [
+            177,
+            177
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "kind": "chapter",
+      "number": 7,
+      "title": "第 7 章 动态链接",
+      "part": 3,
+      "directory": "chapters/07",
+      "cover_page": 202,
+      "sections": [
+        {
+          "title": "7.1 为什么要动态链接",
+          "path": "sections/7.1.md",
+          "pdf_pages": [
+            203,
+            207
+          ],
+          "printed_pages": [
+            180,
+            184
+          ]
+        },
+        {
+          "title": "7.2 简单的动态链接例子",
+          "path": "sections/7.2.md",
+          "pdf_pages": [
+            207,
+            211
+          ],
+          "printed_pages": [
+            184,
+            188
+          ]
+        },
+        {
+          "title": "7.3 地址无关代码",
+          "path": "sections/7.3.md",
+          "pdf_pages": [
+            211,
+            222
+          ],
+          "printed_pages": [
+            188,
+            199
+          ]
+        },
+        {
+          "title": "7.4 延迟绑定（PLT）",
+          "path": "sections/7.4.md",
+          "pdf_pages": [
+            223,
+            225
+          ],
+          "printed_pages": [
+            200,
+            202
+          ]
+        },
+        {
+          "title": "7.5 动态链接相关结构",
+          "path": "sections/7.5.md",
+          "pdf_pages": [
+            225,
+            237
+          ],
+          "printed_pages": [
+            202,
+            214
+          ]
+        },
+        {
+          "title": "7.6 动态链接的步骤和实现",
+          "path": "sections/7.6.md",
+          "pdf_pages": [
+            237,
+            244
+          ],
+          "printed_pages": [
+            214,
+            221
+          ]
+        },
+        {
+          "title": "7.7 显式运行时链接",
+          "path": "sections/7.7.md",
+          "pdf_pages": [
+            244,
+            251
+          ],
+          "printed_pages": [
+            221,
+            228
+          ]
+        },
+        {
+          "title": "7.8 本章小结",
+          "path": "sections/7.8.md",
+          "pdf_pages": [
+            251,
+            251
+          ],
+          "printed_pages": [
+            228,
+            228
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "kind": "chapter",
+      "number": 8,
+      "title": "第 8 章 Linux 共享库的组织",
+      "part": 3,
+      "directory": "chapters/08",
+      "cover_page": 252,
+      "sections": [
+        {
+          "title": "8.1 共享库版本",
+          "path": "sections/8.1.md",
+          "pdf_pages": [
+            253,
+            258
+          ],
+          "printed_pages": [
+            230,
+            235
+          ]
+        },
+        {
+          "title": "8.2 符号版本",
+          "path": "sections/8.2.md",
+          "pdf_pages": [
+            258,
+            264
+          ],
+          "printed_pages": [
+            235,
+            241
+          ]
+        },
+        {
+          "title": "8.3 共享库系统路径",
+          "path": "sections/8.3.md",
+          "pdf_pages": [
+            264,
+            264
+          ],
+          "printed_pages": [
+            241,
+            241
+          ]
+        },
+        {
+          "title": "8.4 共享库查找过程",
+          "path": "sections/8.4.md",
+          "pdf_pages": [
+            264,
+            265
+          ],
+          "printed_pages": [
+            241,
+            242
+          ]
+        },
+        {
+          "title": "8.5 环境变量",
+          "path": "sections/8.5.md",
+          "pdf_pages": [
+            265,
+            268
+          ],
+          "printed_pages": [
+            242,
+            245
+          ]
+        },
+        {
+          "title": "8.6 共享库的创建和安装",
+          "path": "sections/8.6.md",
+          "pdf_pages": [
+            268,
+            271
+          ],
+          "printed_pages": [
+            245,
+            248
+          ]
+        },
+        {
+          "title": "8.7 本章小结",
+          "path": "sections/8.7.md",
+          "pdf_pages": [
+            271,
+            271
+          ],
+          "printed_pages": [
+            248,
+            248
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "kind": "chapter",
+      "number": 9,
+      "title": "第 9 章 Windows 下的动态链接",
+      "part": 3,
+      "directory": "chapters/09",
+      "cover_page": 272,
+      "sections": [
+        {
+          "title": "9.1 DLL 简介",
+          "path": "sections/9.1.md",
+          "pdf_pages": [
+            273,
+            280
+          ],
+          "printed_pages": [
+            250,
+            257
+          ]
+        },
+        {
+          "title": "9.2 符号导出导入表",
+          "path": "sections/9.2.md",
+          "pdf_pages": [
+            280,
+            289
+          ],
+          "printed_pages": [
+            257,
+            266
+          ]
+        },
+        {
+          "title": "9.3 DLL 优化",
+          "path": "sections/9.3.md",
+          "pdf_pages": [
+            289,
+            295
+          ],
+          "printed_pages": [
+            266,
+            272
+          ]
+        },
+        {
+          "title": "9.4 C++ 与动态链接",
+          "path": "sections/9.4.md",
+          "pdf_pages": [
+            296,
+            298
+          ],
+          "printed_pages": [
+            273,
+            275
+          ]
+        },
+        {
+          "title": "9.5 DLL HELL",
+          "path": "sections/9.5.md",
+          "pdf_pages": [
+            299,
+            302
+          ],
+          "printed_pages": [
+            276,
+            279
+          ]
+        },
+        {
+          "title": "9.6 本章小结",
+          "path": "sections/9.6.md",
+          "pdf_pages": [
+            302,
+            302
+          ],
+          "printed_pages": [
+            279,
+            279
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part-4-intro",
+      "kind": "introduction",
+      "title": "库与运行库：导言",
+      "part": 4,
+      "directory": "front/第四部分导言",
+      "sections": [
+        {
+          "title": "库与运行库：导言",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            305,
+            305
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "kind": "chapter",
+      "number": 10,
+      "title": "第 10 章 内存",
+      "part": 4,
+      "directory": "chapters/10",
+      "cover_page": 306,
+      "sections": [
+        {
+          "title": "10.1 程序的内存布局",
+          "path": "sections/10.1.md",
+          "pdf_pages": [
+            307,
+            309
+          ],
+          "printed_pages": [
+            284,
+            286
+          ]
+        },
+        {
+          "title": "10.2 栈与调用惯例",
+          "path": "sections/10.2.md",
+          "pdf_pages": [
+            309,
+            328
+          ],
+          "printed_pages": [
+            286,
+            305
+          ]
+        },
+        {
+          "title": "10.3 堆与内存管理",
+          "path": "sections/10.3.md",
+          "pdf_pages": [
+            328,
+            338
+          ],
+          "printed_pages": [
+            305,
+            315
+          ]
+        },
+        {
+          "title": "10.4 本章小结",
+          "path": "sections/10.4.md",
+          "pdf_pages": [
+            338,
+            338
+          ],
+          "printed_pages": [
+            315,
+            315
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "kind": "chapter",
+      "number": 11,
+      "title": "第 11 章 运行库",
+      "part": 4,
+      "directory": "chapters/11",
+      "cover_page": 340,
+      "sections": [
+        {
+          "title": "11.1 入口函数和程序初始化",
+          "path": "sections/11.1.md",
+          "pdf_pages": [
+            341,
+            358
+          ],
+          "printed_pages": [
+            318,
+            335
+          ]
+        },
+        {
+          "title": "11.2 C/C++ 运行库",
+          "path": "sections/11.2.md",
+          "pdf_pages": [
+            358,
+            373
+          ],
+          "printed_pages": [
+            335,
+            350
+          ]
+        },
+        {
+          "title": "11.3 运行库与多线程",
+          "path": "sections/11.3.md",
+          "pdf_pages": [
+            373,
+            380
+          ],
+          "printed_pages": [
+            350,
+            357
+          ]
+        },
+        {
+          "title": "11.4 C++ 全局构造与析构",
+          "path": "sections/11.4.md",
+          "pdf_pages": [
+            380,
+            390
+          ],
+          "printed_pages": [
+            357,
+            367
+          ]
+        },
+        {
+          "title": "11.5 fread 实现",
+          "path": "sections/11.5.md",
+          "pdf_pages": [
+            391,
+            404
+          ],
+          "printed_pages": [
+            368,
+            381
+          ]
+        },
+        {
+          "title": "11.6 本章小结",
+          "path": "sections/11.6.md",
+          "pdf_pages": [
+            404,
+            404
+          ],
+          "printed_pages": [
+            381,
+            381
+          ]
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "kind": "chapter",
+      "number": 12,
+      "title": "第 12 章系统调用与 API",
+      "part": 4,
+      "directory": "chapters/12",
+      "cover_page": 406,
+      "sections": [
+        {
+          "title": "12.1 系统调用介绍",
+          "path": "sections/12.1.md",
+          "pdf_pages": [
+            407,
+            411
+          ],
+          "printed_pages": [
+            384,
+            388
+          ]
+        },
+        {
+          "title": "12.2 系统调用原理",
+          "path": "sections/12.2.md",
+          "pdf_pages": [
+            411,
+            424
+          ],
+          "printed_pages": [
+            388,
+            401
+          ]
+        },
+        {
+          "title": "12.3 Windows API",
+          "path": "sections/12.3.md",
+          "pdf_pages": [
+            424,
+            432
+          ],
+          "printed_pages": [
+            401,
+            409
+          ]
+        },
+        {
+          "title": "12.4 本章小结",
+          "path": "sections/12.4.md",
+          "pdf_pages": [
+            433,
+            433
+          ],
+          "printed_pages": [
+            410,
+            410
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "kind": "chapter",
+      "number": 13,
+      "title": "第 13 章 运行库实现",
+      "part": 4,
+      "directory": "chapters/13",
+      "cover_page": 434,
+      "sections": [
+        {
+          "title": "13.1 C 语言运行库",
+          "path": "sections/13.1.md",
+          "pdf_pages": [
+            435,
+            452
+          ],
+          "printed_pages": [
+            412,
+            429
+          ]
+        },
+        {
+          "title": "13.2 如何使用 Mini CRT",
+          "path": "sections/13.2.md",
+          "pdf_pages": [
+            452,
+            456
+          ],
+          "printed_pages": [
+            429,
+            433
+          ]
+        },
+        {
+          "title": "13.3 C++ 运行库实现",
+          "path": "sections/13.3.md",
+          "pdf_pages": [
+            456,
+            469
+          ],
+          "printed_pages": [
+            433,
+            446
+          ]
+        },
+        {
+          "title": "13.4 如何使用 Mini CRT++",
+          "path": "sections/13.4.md",
+          "pdf_pages": [
+            469,
+            471
+          ],
+          "printed_pages": [
+            446,
+            448
+          ]
+        },
+        {
+          "title": "13.5 本章小结",
+          "path": "sections/13.5.md",
+          "pdf_pages": [
+            471,
+            471
+          ],
+          "printed_pages": [
+            448,
+            448
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A",
+      "kind": "appendix",
+      "title": "附录 A",
+      "part": 5,
+      "directory": "chapters/A",
+      "cover_page": 472,
+      "sections": [
+        {
+          "title": "A.1 字节序（Byte Order）",
+          "path": "sections/A.1.md",
+          "pdf_pages": [
+            473,
+            474
+          ]
+        },
+        {
+          "title": "A.2 ELF 常见段",
+          "path": "sections/A.2.md",
+          "pdf_pages": [
+            474,
+            475
+          ]
+        },
+        {
+          "title": "A.3 常用开发工具命令行参考",
+          "path": "sections/A.3.md",
+          "pdf_pages": [
+            476,
+            479
+          ]
+        }
+      ]
+    },
+    {
+      "id": "index",
+      "kind": "index",
+      "title": "索引",
+      "part": 5,
+      "directory": "front/索引",
+      "sections": [
+        {
+          "title": "索引",
+          "path": "sections/introduction.md",
+          "pdf_pages": [
+            480,
+            482
+          ]
+        }
+      ]
+    }
+  ]
+}

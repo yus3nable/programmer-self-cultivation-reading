@@ -1,0 +1,32 @@
+{% set book = page.meta.book or {} %}
+<div class="reader-page reader-{{ book.kind or 'section' }}">
+  {% if book.kind == 'home' %}
+  <header class="reading-heading home-heading">
+    <div>
+      <div class="reading-context">A PROGRAM'S JOURNEY</div>
+      {{ page.content.split('</h1>',1)[0] | safe }}</h1>
+      <p class="book-subtitle">链接、装载与库</p>
+      <p class="home-note">从一行代码，走进程序运行的内部。</p>
+      <div class="reading-detail">13 章 · 4 个部分 · Linux &amp; Windows</div>
+    </div>
+    <div class="program-art" aria-hidden="true">
+      <div class="program-stage stage-source"><small>01 / SOURCE</small><strong>hello.c</strong><span>int main() { … }</span></div>
+      <div class="program-stage stage-object"><small>02 / OBJECT</small><strong>hello.o</strong><span>.text　.data　.bss</span></div>
+      <div class="program-stage stage-process"><small>03 / PROCESS</small><strong>memory</strong><span>stack / heap / code</span></div>
+      <div class="program-line line-one"></div><div class="program-line line-two"></div>
+    </div>
+  </header>
+  {% else %}
+  <header class="reading-heading">
+    <div class="reading-context">{{ book.context or '链接、装载与库' }}</div>
+    {{ page.content.split('</h1>',1)[0] | safe }}</h1>
+    <div class="reader-actions">
+      {% if book.printed %}<span>原书 {{ book.printed }}</span>{% endif %}
+      {% if book.whole %}<a href="{{ book.whole | url }}">整章阅读 ↗</a>{% endif %}
+      {% if book.start %}<a href="{{ book.start | url }}">返回分节阅读 ↗</a>{% endif %}
+      {% if book.source %}<a href="{{ book.source | url }}">对照原页 ↗</a>{% endif %}
+    </div>
+  </header>
+  {% endif %}
+  <div class="book-prose">{{ page.content.split('</h1>',1)[1] | safe }}</div>
+</div>
