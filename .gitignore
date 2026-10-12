@@ -9,3 +9,4 @@ maintenance/*
 !maintenance/reading-order.json
 !maintenance/reading-pages.json
 !maintenance/DEPLOYMENT.md
+source-pages/

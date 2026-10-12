@@ -24,7 +24,6 @@
       {% if book.printed %}<span>原书 {{ book.printed }}</span>{% endif %}
       {% if book.whole %}<a href="{{ book.whole | url }}">整章阅读 ↗</a>{% endif %}
       {% if book.start %}<a href="{{ book.start | url }}">返回分节阅读 ↗</a>{% endif %}
-      {% if book.source %}<a href="{{ book.source | url }}">对照原页 ↗</a>{% endif %}
     </div>
   </header>
   {% endif %}
