@@ -39,7 +39,10 @@ markdown_extensions:
       permalink: true
   - pymdownx.highlight
   - pymdownx.superfences
+extra_javascript:
+  - https://yus3nable.github.io/assets/section-copy.js?v=20261113
 extra_css:
+  - https://yus3nable.github.io/assets/section-copy.css?v=20261113
   - styles/reader.css
 extra:
   generator: false
